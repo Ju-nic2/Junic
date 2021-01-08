@@ -1,11 +1,45 @@
 <!doctype HTML>
 <HTML>
+  <style>
+  a{
+    color : black;
+    text-decoration: none;
+  }
+  .upperBar #menu #clicked{
+    background-color:rgb(0, 100, 0);
+    color:rgb(248, 248, 255);
+  }
+  .upperBar #menu{
+    display: grid;
+    text-align: center;
+    font-size:25px;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  .upperBar h1{
+    text-align: center;
+    font-size:80px;
+    padding-bottom: 5px;
+    margin-top:30px;
+    margin-bottom:5px;
+    padding:10px;
+  }
+  .upperBar{
+      border-bottom: black 2px solid;
+  }
+  </style>
   <head>
-    <title>Junic's c++</title>
+    <title>Junic's profile</title>
     <meta charset="utf-8">
   </head>
 <body>
-  <h1>Junic's C++ Study</h1>
+  <div class="upperBar">
+    <h1><a href="index.html">Junic World</a></h1>
+      <div id="menu">
+        <div><a href="profile.html">Profile</a></div>
+        <div><a href="2.html">HTML</a></div>
+        <div id ="clicked"><a href="3.html">C++</a></div>
+      </div>
+  </div>
   <h2>What is C++</h2>
   <p>
   I want to be good at C++. C++ is hard<br>
