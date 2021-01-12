@@ -1,16 +1,4 @@
-#upperBar{
-    border-bottom: black 2px solid;
-}
-#upperBar .menu #clicked{
-  background-color:rgb(0, 100, 0);
-  color:rgb(248, 248, 255);
-}
- #upperBar .menu{
-  display: grid;
-  text-align: center;
-  font-size:25px;
-  grid-template-columns: 1fr 1fr 1fr;
-}
+
 #grid{
   margin-top:10px;
   display: grid;
@@ -44,12 +32,23 @@
   display: grid;
   grid-template-columns: 160px 1fr;
 }
+#subgrid{
+  margin-top:10px;
+  display: grid;
+  grid-template-columns: 430px 1fr;
+}
 #bold_Text{
   font-weight: bold;
-    font-style: initial;
+  font-style: initial;
+  font-size: 15px;
 }
 #italic_Text{
   font-style: italic;
+}
+h1{
+  font-size:40px;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 @media (max-width : 600px) {
   .side_List{
