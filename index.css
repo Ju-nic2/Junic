@@ -1,0 +1,30 @@
+#indexBody{
+  border-right: black 2px dashed;
+  border-left : black 2px dashed;
+  margin-right: 150px;
+  margin-left:150px;
+  text-align: center;
+}
+#indexBody .mainList{
+  display: inline;
+  align-items: center;
+  margin:10px;
+  padding:20px;
+  width:100px;
+  text-align:center;
+  list-style-position:center;
+  list-style-type: none;
+}
+
+#indexBody .mainList li{
+  margin-bottom: 20px;
+  font-size: 30px;
+}
+#content_Title{
+  font-size: 30px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+#content_Title a{
+   text-decoration:underline;
+}
