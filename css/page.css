@@ -22,11 +22,16 @@
   margin-left: 50px;
 }
 .content_Title{
+  font-weight: bold;
   font-size:30px;
   margin-top: 10px;
   margin-bottom: 10px;
 }
-
+.image_grid{
+  margin-top:10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
 #subgrid{
   margin-top:10px;
   display: grid;
