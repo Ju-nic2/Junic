@@ -8,7 +8,7 @@ var app = http.createServer(function(request,response){
     var title = queryData.id;
     console.log(queryData.id);
     if(_url == '/'){
-      title = 'Welcome';
+      title = 'hi';
     }
     if(_url == '/favicon.ico'){
       return response.writeHead(404);
