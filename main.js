@@ -11,7 +11,7 @@ var app = http.createServer(function(request,response){
       if(queryData.id === undefined){
         fs.readFile(`frame.css`,'utf8',function(err, description){
             console.log(url.parse(_url, true));
-            //console.log(data);
+            console.log(queryData.id);
             var template=`
             <!doctype HTML>
         <HTML>
