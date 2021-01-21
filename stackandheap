@@ -1,0 +1,82 @@
+<!doctype HTML>
+<HTML>
+  <head>
+    <title>Junic's profile</title>
+    <meta charset="utf-8">
+    <meta name="google-site-verification" content="_UmgzBX9p_Eotd1ADpqgGjzVTH6q3LJfvrF4M0t_flc" />
+    <link rel="stylesheet" href="css/frame.css">
+    <link rel="stylesheet" href="css/page.css">
+  </head>
+<body>
+  <p id ="title"><a href="index.html">Junic World</a></p>
+  <div id="upperBar">
+      <div class ="menu">
+        <div><a href="profile.html">Profile</a></div>
+        <div><a href="2.html">HTML</a></div>
+        <div id ="clicked"><a href="c++.html">C++</a></div>
+        <div><a href="guitar.html">Guitar</a></div>
+      </div>
+  </div>
+  <div id="grid">
+    <div class="side_List">
+      <p id ="side_List_Tilte">Topics</p>
+      <ul class ="side_List_content">
+        <li><a >Basic</a> </li>
+        <li><a >Stack</a></li>
+        <li><a >Heap</a></li>
+        <li><a >Memory leak</a></li>
+      </ul>
+    </div>
+    <div id = "page_Contents">
+      <h1>Stack and Heap</h1>
+      <div>
+          <img src="images/post1cc.jpg" width = 500dp>
+      </div>
+      <p class = "content_Title">Basic</p>
+      <p>
+        One way of Computer use memory <br>
+        when we run code, <br>
+        uninitialized global,static variables are allocated in bss<br>
+        initialized global,static variables are allocated in data<br>
+        And while we run code, <br>
+        computer provide memory stack, heap
+      </p>
+      <p class = "content_Title">Stack</p>
+      <div>
+          <img src="images/post2cc.jpg" width = 500dp>
+      </div>
+      <p>
+        In code when functions runnig <br>
+        Functions take stack memory in order <br>
+        Autometicaly,when functions end, where they take, is emtpy<br>
+      </p>
+      <p class = "content_Title">Heap</p>
+      <div>
+          <img src="images/post3cc.jpg" width = 500dp>
+      </div>
+      <p>
+        Stack is smaller than heap<br>
+        Functions in stack, need more memory like array <br>
+        Os assign prefer memory in Heap and tell the 'address' to pointer Valiable in stack<br>
+        this way is occured when we use 'new' in code<br>
+        But, heap isn't empty Autometicaly, doesn't like stack's way<br>
+        In c++ ,you must use 'delete' to empty memory<br>
+      </p>
+      <p class = "content_Title">Memory leak</p>
+      <div>
+          <img src="images/post4cc.jpg" width = 500dp>
+      </div>
+      <p>
+        When Function is over in stack, the Poiter variables has heap memory address also gone<br>
+        How we can access heap memory? we doesn't have address <br>
+        This is memory leak, memory in heap exist, but code can't access<br>
+        Nowadays, many languages use Garbage Colloection because that reason <br>
+      </p>
+
+  </div>
+  <div id= "last">
+    <div style="text-align:left">Since 2021</div>
+    <div style="text-align:right">contact : ata97@naver.com</div>
+  </div>
+</body>
+</HTML>
