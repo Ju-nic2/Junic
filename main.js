@@ -102,7 +102,7 @@ var app = http.createServer(function(request,response){
   // if server get 'post' message form browser
   }else if(pathname === '/create_process' ){
     var body = '';
-    //get date 
+    //get data 
     request.on('data',function(data){
       body = body + data;
     });
@@ -147,7 +147,7 @@ var app = http.createServer(function(request,response){
   //get updated file and fix name,description
   }else if(pathname === '/update_process'){
     var body = '';
-    //get date 
+    //get data
     request.on('data',function(data){
       body = body + data;
     });
