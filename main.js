@@ -1,51 +1,10 @@
 var http = require('http');
 var fs = require('fs');
 var url = require('url');
-var qs = require(`querystring`)
+var qs = require(`querystring`);
+var path = require('path');
 
-//make main description of page
-function templateHTML(title, list, body,control)
-{
-  return `
-      <!doctype HTML>
-    <HTML>
-    <head>
-      <title>JunicWorld</title>
-      <meta charset="utf-8">
-      <link rel="stylesheet" href="frame.css">
-      <link rel="stylesheet" href="index.css">
-    </head>
-    <body>
-    <p id ="title"><a href="/">JunicWorld</a></p>
-    <div id="indexBody">
-      <p style="margin-top:5px;">
-        <img src = "indexSample.jpg" width="400dp">
-      </p>
-      ${list}
-     ${control}
-      <h2>${title}</h2>
-      ${body}    
-    </div>
-    <div id= "last">
-      <div style="text-align:left">Since 2021</div>
-      <div style="text-align:right">contact : ata97@naver.com</div>
-    </div>
-    </body>
-    </HTML>
-    `;
-}
-// make list fuction
-function templateList(filelist){
-  var list = '<ul>';
-  var i = 0;
-  while(i < filelist.length){
-    var listname = filelist[i].split('.');
-    list = list + `<li><a href="/?id=${filelist[i]}">${listname[0]}</a></li>`;
-    i = i + 1;
-  }
-  list = list+'</ul>';
-  return list;
-}
+var template = require('./lib/template.js');
 
 var app = http.createServer(function(request,response){
     var _url = request.url;
@@ -57,20 +16,21 @@ var app = http.createServer(function(request,response){
       if(queryData.id === undefined){
         fs.readdir('./data', function(error, filelist){
           var title = "JunicWorld";
-          var list = templateList(filelist);
+          var list = template.list(filelist);
           var description = " hello travelrs"
-          var template= templateHTML(title,list, `${description}`,`<a href="/create">Create</a>`);
+          var HTML= template.HTML(title,list, `${description}`,`<a href="/create">Create</a>`);
           response.writeHead(200);
-          response.end(template);
+          response.end(HTML);
         }); 
       //else
       }else{
         console.log(url.parse(_url, true));
         fs.readdir('./data', function(error, filelist){
-          fs.readFile(`./data/${queryData.id}`,'utf8',function(err, description){
+          var filteredid = path.parse(queryData.id).base;
+          fs.readFile(`./data/${filteredid}`,'utf8',function(err, description){
             var title = queryData.id.split('.')[0];
-            var list = templateList(filelist);
-            var template= templateHTML(title,list,`${description}`,
+            var list = template.list(filelist);
+            var HTML= template.HTML(title,list,`${description}`,
             `<a href="/create">Create</a> 
              <a href="/update?id=${title}">Update</a>
              <form action="delete_process" method="post">
@@ -78,7 +38,7 @@ var app = http.createServer(function(request,response){
                 <input type="submit" value="delete">
               </form>`);
             response.writeHead(200);
-            response.end(template);
+            response.end(HTML);
           });   
         });
       }
@@ -86,8 +46,8 @@ var app = http.createServer(function(request,response){
   }else if(pathname === '/create'){
         fs.readdir('./data', function(error, filelist){
           var title = "Say to Junic";
-          var list = templateList(filelist);
-          var template= templateHTML(title,list, 
+          var list = template.list(filelist);
+          var HTML= template.HTML(title,list, 
           `<form action="/create_process" method = "post">
               <p><input type="text" name="title" placeholder="who"></p>
               <p><textarea name=description  placeholder="descirption"></textarea>
@@ -97,7 +57,7 @@ var app = http.createServer(function(request,response){
            </form>`
           ,'');
           response.writeHead(200);
-          response.end(template);
+          response.end(HTML);
         }); 
   // if server get 'post' message form browser
   }else if(pathname === '/create_process' ){
@@ -128,9 +88,9 @@ var app = http.createServer(function(request,response){
     fs.readdir('./data', function(error, filelist){
       fs.readFile(`./data/${queryData.id}`,'utf8',function(err, description){
         var title = queryData.id;
-        var list = templateList(filelist);
+        var list = template.list(filelist);
         // "input typue = hidden" can match the file 
-        var template= templateHTML(title,list,
+        var HTML= template.HTML(title,list,
         `<form action="/update_process" method = "post">
             <input type="hidden" name="id" value="${title}">
             <p><input type="text" name="title" placeholder="who" value ="${title}"></p>
@@ -141,7 +101,7 @@ var app = http.createServer(function(request,response){
            </form>`,
         `<a href="/create">Create</a> <a href="/update?id=${title}">Update</a>`);
         response.writeHead(200);
-        response.end(template);
+        response.end(HTML);
       });   
     });
   //get updated file and fix name,description
@@ -155,10 +115,11 @@ var app = http.createServer(function(request,response){
       //parse date to title,description
       var post = qs.parse(body);
       var id = post.id
+      var filteredid = path.parse(id).base;
       var title = post.title;
       var description = post.description;
       console.log(post);
-      fs.rename(`data/${id}`,`data/${title}`,function(err){
+      fs.rename(`data/${filteredid}`,`data/${title}`,function(err){
         fs.writeFile(`data/${title}`, description, 'utf8', function(err){
           // redirection to page
           response.writeHead(302, {Location: `/?id=${title}`});
@@ -179,7 +140,8 @@ var app = http.createServer(function(request,response){
       var post = qs.parse(body);
       console.log(post);
       var id = post.id
-      fs.stat(`data/${id}`, function (err, stats) {
+      var filteredid = path.parse(id).base;
+      fs.stat(`data/${filteredid}`, function (err, stats) {
         console.log(stats);//here we got all information of file in stats variable
         if (err) {
             return console.error(err);
